@@ -4636,3 +4636,8 @@ header.main-header .header-sticky.active{
         font-size: 28px;
     }
 }
+
+/* Kép nélküli munkatársi monogram */
+.team-placeholder-wrap{display:flex;align-items:center;justify-content:center;min-height:260px;background:#f3f4f6;}
+.team-placeholder{display:flex;align-items:center;justify-content:center;width:100%;min-height:220px;background:#f3f4f6;color:#263238;font-size:64px;font-weight:700;letter-spacing:4px;border-radius:8px;}
+.about-footer-img .team-placeholder{width:120px;min-height:120px;font-size:32px;}
