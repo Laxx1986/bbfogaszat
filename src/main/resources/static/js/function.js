@@ -210,30 +210,33 @@
 	});
 
 	function submitForm(){
-		/* Initiate Variables With Form Content*/
-		var name = $("#name").val();
-		var email = $("#email").val();
-		var phone = $("#phone").val();
-		var subject = $("#subject").val();
-		var message = $("#msg").val();
+		var submitButton = $contactform.find('button[type="submit"]');
+		submitButton.prop('disabled', true);
+		var contactData = {
+			name: $("#name").val(),
+			email: $("#email").val(),
+			phone: $("#phone").val(),
+			subject: $("#subject").val(),
+			message: $("#msg").val()
+		};
 
-		$.ajax({
-			type: "POST",
-			url: "form-process.php",
-			data: "name=" + name + "&email=" + email + "&phone=" + phone + "&subject=" + subject + "&message=" + message,
-			success : function(text){
-				if (text == "success"){
-					formSuccess();
-				} else {
-					submitMSG(false,text);
-				}
-			}
-		});
+		fetch('/api/contact/submit', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json', 'Accept': 'application/json, text/plain' },
+			body: JSON.stringify(contactData)
+		})
+		.then(async function(response){
+			var message = await response.text();
+			if (!response.ok) throw new Error(message || 'Az üzenet küldése nem sikerült.');
+			formSuccess();
+		})
+		.catch(function(error){ submitMSG(false, error.message || 'Hiba történt az üzenet küldésekor. Kérjük, próbálja újra.'); })
+		.finally(function(){ submitButton.prop('disabled', false); });
 	}
 
 	function formSuccess(){
 		$contactform[0].reset();
-		submitMSG(true, "Message Sent Successfully!")
+		submitMSG(true, "Köszönjük! Üzenetét sikeresen elküldtük.")
 	}
 
 	function submitMSG(valid, msg){
@@ -246,52 +249,7 @@
 	}
 	/* Contact form validation end */
 
-	/* Appointment form validation */
-	var $appointmentForm = $("#appointmentForm");
-	$appointmentForm.validator({focus: false}).on("submit", function (event) {
-		if (!event.isDefaultPrevented()) {
-			event.preventDefault();
-			submitappointmentForm();
-		}
-	});
-
-	function submitappointmentForm(){
-		/* Initiate Variables With Form Content*/
-		var name = $("#name").val();
-		var email = $("#email").val();
-		var phone = $("#phone").val();
-		var date = $("#date").val();
-		var message = $("#msg").val();
-
-		$.ajax({
-			type: "POST",
-			url: "form-appointment.php",
-			data: "name=" + name + "&email=" + email + "&phone=" + phone + "&date=" + date + "&message=" + message,
-			success : function(text){
-				if (text == "success"){
-					appointmentformSuccess();
-				} else {
-					appointmentsubmitMSG(false,text);
-				}
-			}
-		});
-	}
-
-	function appointmentformSuccess(){
-		$appointmentForm[0].reset();
-		appointmentsubmitMSG(true, "Message Sent Successfully!")
-	}
-
-	function appointmentsubmitMSG(valid, msg){
-		if(valid){
-			var msgClasses = "h3 text-success";
-		} else {
-			var msgClasses = "h3 text-danger";
-		}
-		$("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
-	}
-	/* Appointment form validation end */
-
+	/* Az időpont-egyeztetés a kapcsolatfelvételi űrlapon történik. */
 
 	/* Animated Wow Js */	
 	new WOW().init();
