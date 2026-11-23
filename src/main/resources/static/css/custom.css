@@ -4655,3 +4655,32 @@ header.main-header .header-sticky.active{
 .about-team-card:hover { color:inherit; }
 .about-team-card h3 { font-size:20px; }
 .about-team-card p { margin-bottom:0; }
+
+
+/* About page: compact staff thumbnails, no cropping or distortion. */
+.about-team-card { display:block; height:100%; color:inherit; text-decoration:none; }
+.about-team-card:hover { color:inherit; }
+.about-team-thumb {
+  display:block;
+  height:5cm !important;
+  max-height:5cm;
+  width:auto !important;
+  max-width:100%;
+  aspect-ratio:auto !important;
+  object-fit:contain;
+  border-radius:8px;
+  margin:0 auto 12px;
+}
+.about-team-card h3 { font-size:20px; margin-top:0 !important; }
+.about-team-card p { margin-bottom:0; }
+
+/* Profile portrait: retain its natural portrait ratio and disable the shine overlay. */
+.team-member-img { height:auto; aspect-ratio:auto !important; }
+.team-member-img figure { margin:0; }
+.team-member-img img {
+  display:block;
+  width:100%;
+  height:auto !important;
+  aspect-ratio:auto !important;
+  object-fit:contain;
+}
