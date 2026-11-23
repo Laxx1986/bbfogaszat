@@ -4684,3 +4684,65 @@ header.main-header .header-sticky.active{
   aspect-ratio:auto !important;
   object-fit:contain;
 }
+
+
+/* Rólunk page staff cards: keep each caption directly under its own thumbnail. */
+.about-team-roster .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 28px;
+}
+.about-team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+.about-team-card:hover,
+.about-team-card:focus {
+  color: var(--accent-color);
+}
+.about-team-thumb {
+  display: block;
+  height: 5cm !important;
+  max-height: 5cm;
+  width: auto !important;
+  max-width: 100%;
+  aspect-ratio: auto !important;
+  object-fit: contain;
+  margin: 0 auto 12px;
+}
+.about-team-card .about-team-name {
+  display: block;
+  width: 100%;
+  margin: 0 0 6px !important;
+  color: var(--accent-color) !important;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.25;
+}
+.about-team-card .about-team-role {
+  display: block;
+  width: 100%;
+  margin: 0;
+  color: var(--accent-color);
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+/* Team page: make doctor names use the same dark green link color as the design. */
+.team-content h2 a {
+  color: var(--accent-color);
+}
+.team-content h2 a:hover,
+.team-content h2 a:focus {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
